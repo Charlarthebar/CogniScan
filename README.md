@@ -37,13 +37,13 @@ If you are using a virtual environment, it is recommended to activate it before 
 
 ## Usage
 
-Start the application
+**Start the application**
 
 ```bash
 python main.py
 ```
 
-Complete the cognitive assessment
+**Complete the cognitive assessment**
 
 Users are guided through a series of cognitive tasks and questionnaires.
 
@@ -51,39 +51,31 @@ Responses and performance metrics are recorded automatically during the session.
 
 Review results
 
-The application generates summary scores and domain-level insights.
-
-Results may be displayed within the application or exported for further analysis.
+- The application generates summary scores and domain-level insights.
+- Results may be displayed within the application or exported for further analysis.
 
 ## Data & Privacy
 
-This project does not include production-grade data security by default.
-
-Any deployment involving real user data should comply with applicable privacy and research regulations (e.g., HIPAA, IRB requirements).
-
-Developers are responsible for implementing appropriate safeguards such as encryption, access control, and anonymization.
+- This project does not include production-grade data security by default.
+- Any deployment involving real user data should comply with applicable privacy and research regulations (e.g., HIPAA, IRB requirements).
+- Developers are responsible for implementing appropriate safeguards such as encryption, access control, and anonymization.
 
 ## Intended Use
 
 This application is intended for:
 
-Academic and clinical research
-
-Educational demonstrations
-
-Prototype clinical decision-support tools
-
-Exploratory analysis of cognitive performance data
+- Academic and clinical research
+- Educational demonstrations
+- Prototype clinical decision-support tools
+- Exploratory analysis of cognitive performance data
 
 It is not intended for independent clinical diagnosis or treatment decisions.
 
 ## Limitations
 
-Outputs are indicative and probabilistic rather than definitive diagnoses.
-
-Performance may vary across populations, languages, and testing environments.
-
-The application does not replace professional clinical judgment, neuropsychological evaluation, or medical imaging.
+- Outputs are indicative and probabilistic rather than definitive diagnoses.
+- Performance may vary across populations, languages, and testing environments.
+- The application does not replace professional clinical judgment, neuropsychological evaluation, or medical imaging.
 
 ## Disclaimer
 
