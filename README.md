@@ -43,13 +43,13 @@ If you are using a virtual environment, it is recommended to activate it before 
 python main.py
 ```
 
-**Complete the cognitive assessment**
+### Complete the cognitive assessment
 
 Users are guided through a series of cognitive tasks and questionnaires.
 
 Responses and performance metrics are recorded automatically during the session.
 
-Review results
+### Review results
 
 - The application generates summary scores and domain-level insights.
 - Results may be displayed within the application or exported for further analysis.
@@ -79,15 +79,9 @@ It is not intended for independent clinical diagnosis or treatment decisions.
 
 ## Disclaimer
 
-This software is not a medical device.
+**This software is not a medical device.**
 
 It is provided for research and educational purposes only and must not be used as a substitute for professional medical diagnosis, treatment, or medical advice. Any clinical use requires appropriate regulatory approval and medical supervision.
-
-## License
-
-Specify the license for this project below:
-
-MIT License
 
 ## Contributing
 
