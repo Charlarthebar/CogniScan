@@ -25,11 +25,13 @@ Clone the repository:
 ```bash
 git clone https://github.com/your-username/Dementia-Diagnosis.git
 cd Dementia-Diagnosis
+```
 
 Install dependencies (example for Python-based projects):
 
+```bash
 pip install -r requirements.txt
-
+```
 
 If you are using a virtual environment, it is recommended to activate it before installing dependencies.
 
@@ -37,8 +39,9 @@ If you are using a virtual environment, it is recommended to activate it before 
 
 Start the application
 
+```bash
 python main.py
-
+```
 
 Complete the cognitive assessment
 
@@ -98,13 +101,3 @@ MIT License
 
 Contributions are welcome. Please open an issue or submit a pull request with clear documentation and justification for proposed changes.
 
-
----
-
-If you want, next I can:
-- Add a **Methods / Cognitive Domains** section describing task types  
-- Tighten language to be **NIH SBIR / FDA SaMD–safe**
-- Write a **technical README** for researchers and developers
-- Add an **Ethics & Bias Considerations** section (strongly recommended)
-
-Just tell me.
