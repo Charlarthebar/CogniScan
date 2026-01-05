@@ -37,7 +37,7 @@ If you are using a virtual environment, it is recommended to activate it before 
 
 ## Usage
 
-**Start the application**
+###Start the application
 
 ```bash
 python main.py
