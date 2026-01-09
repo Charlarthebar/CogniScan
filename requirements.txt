@@ -1,4 +1,4 @@
-# Dementia Diagnosis App - Dependencies
+# CogniScan - Cognitive Screening Tool
 # Install with: pip install -r requirements.txt
 
 kivy>=2.2.0

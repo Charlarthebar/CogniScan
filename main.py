@@ -1,5 +1,5 @@
 """
-Dementia Diagnosis Assessment Application
+CogniScan - Cognitive Screening Application
 
 A cognitive screening tool based on established neuropsychological tests including
 elements from the Mini-Mental State Examination (MMSE) and Montreal Cognitive
@@ -264,9 +264,9 @@ class DementiaDiagnosisApp(App):
 
     def build(self):
         """Initialize the application."""
-        self.title = "Cognitive Assessment Tool"
+        self.title = "CogniScan"
         self.initialize_tests()
-        return Builder.load_file('dementiadiagnosis.kv')
+        return Builder.load_file('cogniscan.kv')
 
     def initialize_tests(self):
         """Set up all test data."""

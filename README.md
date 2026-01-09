@@ -1,4 +1,4 @@
-# Cognitive Assessment Tool
+# CogniScan
 
 A comprehensive cognitive screening application built with Python and Kivy, designed to evaluate multiple domains of cognitive function through standardized neuropsychological tests.
 
@@ -48,8 +48,8 @@ This cognitive assessment tool evaluates seven key cognitive domains based on el
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/CharlesJLai/Dementia-Diagnosis.git
-cd Dementia-Diagnosis
+git clone https://github.com/CharlesJLai/CogniScan.git
+cd CogniScan
 ```
 
 2. (Recommended) Create and activate a virtual environment:
@@ -94,9 +94,9 @@ python main.py
 ## Project Structure
 
 ```
-Dementia-Diagnosis/
+CogniScan/
 ├── main.py                 # Application logic and test implementations
-├── dementiadiagnosis.kv    # Kivy UI layout and styling
+├── cogniscan.kv            # Kivy UI layout and styling
 ├── words.txt               # Word bank for memory tests
 ├── requirements.txt        # Python dependencies
 └── README.md               # This file
