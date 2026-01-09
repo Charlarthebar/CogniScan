@@ -1,0 +1,4 @@
+# Dementia Diagnosis App - Dependencies
+# Install with: pip install -r requirements.txt
+
+kivy>=2.2.0

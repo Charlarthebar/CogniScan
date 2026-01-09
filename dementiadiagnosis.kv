@@ -1,418 +1,1823 @@
-#Setting Default Widget Properties
-<Button>
-    # Background Color to Green for Buttons
-    background_normal: ""
-    background_color: (0,.9,.1,1)
+#:kivy 2.2.0
+
+# ============================================================================
+# COLOR PALETTE & DESIGN SYSTEM
+# ============================================================================
+# Primary:    #2C3E50 (Dark Blue-Gray)
+# Secondary:  #3498DB (Bright Blue)
+# Accent:     #27AE60 (Green)
+# Warning:    #E74C3C (Red)
+# Background: #ECF0F1 (Light Gray)
+# Text:       #2C3E50 (Dark)
+# Light Text: #FFFFFF (White)
+
+# ============================================================================
+# GLOBAL STYLES
+# ============================================================================
 
 <Label>
-    font_size: "25dp"
+    font_size: "18dp"
+    color: 0.17, 0.24, 0.31, 1
+    text_size: self.width, None
+    halign: "center"
+    valign: "middle"
 
-# Defining Rounded "Next" Button
-<RoundedNextButton@Button>
-    background_color: (0,0,0,0)
+<TextInput>
+    font_size: "20dp"
+    multiline: False
+    padding: [15, 15, 15, 15]
+    background_color: 1, 1, 1, 1
+    foreground_color: 0.17, 0.24, 0.31, 1
+    cursor_color: 0.2, 0.6, 0.86, 1
+    hint_text_color: 0.6, 0.6, 0.6, 1
+
+<Button>
+    font_size: "18dp"
     background_normal: ""
+    background_color: 0.2, 0.6, 0.86, 1
+    color: 1, 1, 1, 1
+
+# ============================================================================
+# CUSTOM WIDGETS
+# ============================================================================
+
+<PrimaryButton@Button>
+    background_color: 0, 0, 0, 0
     canvas.before:
         Color:
-            rgba: (49/255, 247/255, 5/255, 1) if self.state == 'normal' else [0.2, 0.2, 0.2, 1] 
+            rgba: (0.15, 0.68, 0.38, 1) if self.state == 'normal' else (0.11, 0.53, 0.29, 1)
         RoundedRectangle:
             size: self.size
             pos: self.pos
-            radius: [20]
+            radius: [12]
+    font_size: "20dp"
+    bold: True
+    size_hint_y: None
+    height: "55dp"
 
+<SecondaryButton@Button>
+    background_color: 0, 0, 0, 0
+    canvas.before:
+        Color:
+            rgba: (0.2, 0.6, 0.86, 1) if self.state == 'normal' else (0.16, 0.5, 0.73, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [12]
+    font_size: "18dp"
+    size_hint_y: None
+    height: "50dp"
 
+<DangerButton@Button>
+    background_color: 0, 0, 0, 0
+    canvas.before:
+        Color:
+            rgba: (0.91, 0.3, 0.24, 1) if self.state == 'normal' else (0.75, 0.22, 0.17, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [12]
+    font_size: "18dp"
+    size_hint_y: None
+    height: "50dp"
 
+<ColorButton@Button>
+    background_color: 0, 0, 0, 0
+    font_size: "16dp"
+    bold: True
+    size_hint: None, None
+    size: "100dp", "50dp"
 
+<Card@BoxLayout>
+    orientation: "vertical"
+    padding: "20dp"
+    spacing: "15dp"
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 0.95
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [15]
+
+<ScreenBackground@FloatLayout>
+    canvas.before:
+        Color:
+            rgba: 0.93, 0.94, 0.95, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<PhaseHeader@Label>
+    font_size: "14dp"
+    color: 0.2, 0.6, 0.86, 1
+    bold: True
+    size_hint_y: None
+    height: "30dp"
+    text_size: self.width, None
+
+<MainTitle@Label>
+    font_size: "28dp"
+    color: 0.17, 0.24, 0.31, 1
+    bold: True
+    size_hint_y: None
+    height: "50dp"
+
+<ScoreDisplay@Label>
+    font_size: "72dp"
+    color: 0.15, 0.68, 0.38, 1
+    bold: True
+    size_hint_y: None
+    height: "100dp"
+
+<TimerDisplay@Label>
+    font_size: "36dp"
+    color: 0.91, 0.3, 0.24, 1
+    bold: True
+    size_hint_y: None
+    height: "60dp"
+
+# ============================================================================
+# SCREEN MANAGER
+# ============================================================================
 
 WindowManager:
     TitleScreen:
     DescriptionScreen:
+    OrientationIntroScreen:
+    OrientationScreen:
+    OrientationScoreScreen:
     FiveWordsIntroScreen:
     FiveWordsScreen:
-    CheckWordsScreen:
-    DisplayScoreScreen:
+    ImmediateRecallScreen:
+    ImmediateRecallScoreScreen:
     Serial7sIntroScreen:
-    Serial7sScreen: 
+    Serial7sScreen:
     Serial7sScoreScreen:
+    DigitSpanIntroScreen:
+    DigitSpanForwardScreen:
+    DigitSpanBackwardScreen:
+    DigitSpanScoreScreen:
+    CategoryFluencyIntroScreen:
+    CategoryFluencyScreen:
+    CategoryFluencyScoreScreen:
     StroopTestIntroScreen:
     StroopTestScreen:
+    StroopScoreScreen:
+    DelayedRecallIntroScreen:
+    DelayedRecallScreen:
+    DelayedRecallScoreScreen:
+    ResultsScreen:
 
+# ============================================================================
+# TITLE SCREEN
+# ============================================================================
 
-
-<TitleScreen>
+<TitleScreen>:
     name: "title"
 
-    BoxLayout:
-        orientation: "vertical"
-        padding: 20
-        spacing: 50
-
-        Label: 
-            text: "Dementia Diagnosis Assessment"
-            halign: "center"
-            valign: "center"
-            font_size: 100
-            
+    ScreenBackground:
         BoxLayout:
-            orientation: "horizontal"
-            Label:
-                text: ""
-                width: 10
-            RoundedNextButton:
-                text: "Next"
-                size_hint: 1, 0.5
-                on_release: 
-                    app.root.current = "description"
-                    root.manager.transition.direction = "left"
-            Label:
-                text: ""
-                width: 10
+            orientation: "vertical"
+            padding: "40dp"
+            spacing: "30dp"
 
+            Widget:
+                size_hint_y: 0.15
 
-<DescriptionScreen@ScrollView>
+            Label:
+                text: "Cognitive Assessment"
+                font_size: "42dp"
+                bold: True
+                color: 0.17, 0.24, 0.31, 1
+                size_hint_y: None
+                height: "60dp"
+
+            Label:
+                text: "Tool"
+                font_size: "42dp"
+                bold: True
+                color: 0.2, 0.6, 0.86, 1
+                size_hint_y: None
+                height: "60dp"
+
+            Widget:
+                size_hint_y: 0.05
+
+            Label:
+                text: "A comprehensive screening for cognitive function based on established neuropsychological assessments"
+                font_size: "16dp"
+                color: 0.4, 0.5, 0.55, 1
+                size_hint_y: None
+                height: "80dp"
+
+            Widget:
+                size_hint_y: 0.15
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "20dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                PrimaryButton:
+                    text: "Begin Assessment"
+                    size_hint_x: 0.6
+                    on_release:
+                        app.root.current = "description"
+                        root.manager.transition.direction = "left"
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.2
+
+# ============================================================================
+# DESCRIPTION / DISCLAIMER SCREEN
+# ============================================================================
+
+<DescriptionScreen>:
     name: "description"
 
-    BoxLayout:
-        padding: 20
-        spacing: 50
-        orientation: "vertical"
+    ScreenBackground:
+        ScrollView:
+            do_scroll_x: False
+            bar_width: "8dp"
 
-        Label:
-            text: "This is a dementia diagnosis test. It is designed to give users a basic overview of their mental condition and give a general diagnosis of whether they are in some stage of dementia."
-            text_size: self.width, None
-            halign: "center"
-            valign: "center"
-            height: self.texture_size[1]
+            BoxLayout:
+                orientation: "vertical"
+                padding: "30dp"
+                spacing: "20dp"
+                size_hint_y: None
+                height: self.minimum_height
 
+                MainTitle:
+                    text: "About This Assessment"
 
-        Label:
-            text: "The user will go through a series of tests, including a memory test, some basic puzzles, and a slurred speech detector. A score will be totaled based off of the results from these tests to give the user or a healcare professional an estimation of their approximate cognitive ability."
-            text_size: self.width, None
-            halign: "center"
-            valign: "center"
-            height: self.texture_size[1]
+                Card:
+                    size_hint_y: None
+                    height: self.minimum_height
 
-        Label:
-            text: "** Disclaimer **"     
-            text_size: self.width, None
-            halign: "center"
-            valign: "center"
-            height: self.texture_size[1]
-        
-        Label:
-            text: "This is not an official dementia diagnosis test. This is designed to give the patient some insight into their condition and to assist doctors in their work."
-            text_size: self.width, None
-            halign: "center"
-            valign: "center"
-            height: self.texture_size[1]
+                    Label:
+                        text: "This cognitive screening tool evaluates multiple domains of cognitive function through a series of standardized tasks. The assessment takes approximately 15-20 minutes to complete."
+                        size_hint_y: None
+                        height: self.texture_size[1]
 
-        RoundedNextButton:
-            text: "Start"
-            font_size: "25dp"
-            on_release:
-                app.root.current = "fivewordsintro"
-                root.manager.transition.direction = "left"
+                    Label:
+                        text: "[b]Assessment Areas:[/b]"
+                        markup: True
+                        size_hint_y: None
+                        height: "30dp"
 
+                    Label:
+                        text: "- Orientation (awareness of time)\n- Memory (immediate and delayed recall)\n- Attention (Serial 7s subtraction)\n- Working Memory (digit span)\n- Language (category fluency)\n- Executive Function (Stroop test)"
+                        halign: "left"
+                        size_hint_y: None
+                        height: self.texture_size[1]
 
-<FiveWordsIntroScreen>
+                Card:
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                    Label:
+                        text: "[b]IMPORTANT DISCLAIMER[/b]"
+                        markup: True
+                        color: 0.91, 0.3, 0.24, 1
+                        font_size: "20dp"
+                        size_hint_y: None
+                        height: "35dp"
+
+                    Label:
+                        text: "This application is NOT a medical diagnostic tool. It is designed for educational and research purposes only.\n\nResults should be interpreted by qualified healthcare professionals. This screening cannot diagnose dementia or any other medical condition.\n\nIf you have concerns about your cognitive health, please consult a physician or neurologist for proper evaluation."
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        color: 0.3, 0.35, 0.4, 1
+
+                BoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: "55dp"
+                    spacing: "15dp"
+
+                    Widget:
+                        size_hint_x: 0.15
+
+                    PrimaryButton:
+                        text: "I Understand - Start Assessment"
+                        size_hint_x: 0.7
+                        on_release:
+                            app.root.current = "orientationintro"
+                            root.manager.transition.direction = "left"
+
+                    Widget:
+                        size_hint_x: 0.15
+
+                Widget:
+                    size_hint_y: None
+                    height: "20dp"
+
+# ============================================================================
+# ORIENTATION TEST
+# ============================================================================
+
+<OrientationIntroScreen>:
+    name: "orientationintro"
+
+    ScreenBackground:
+        BoxLayout:
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "25dp"
+
+            PhaseHeader:
+                text: "PHASE 1 OF 7"
+
+            MainTitle:
+                text: "Orientation"
+
+            Card:
+                Label:
+                    text: "This section assesses your awareness of the current date and time. You will be asked 5 questions about today's date.\n\nPlease answer each question to the best of your ability. There is no time limit for this section."
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+            Widget:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                PrimaryButton:
+                    text: "Begin"
+                    size_hint_x: 0.6
+                    on_release:
+                        app.root.get_screen('orientation').current_question = app.get_current_orientation_question()
+                        app.root.get_screen('orientation').question_number = 1
+                        app.root.current = "orientation"
+                        root.manager.transition.direction = "left"
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.1
+
+<OrientationScreen>:
+    name: "orientation"
+    current_question: ""
+    question_number: 1
+
+    ScreenBackground:
+        BoxLayout:
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "25dp"
+
+            PhaseHeader:
+                text: "ORIENTATION - Question " + str(root.question_number) + "/5"
+
+            Widget:
+                size_hint_y: 0.1
+
+            Card:
+                Label:
+                    text: root.current_question
+                    font_size: "24dp"
+                    bold: True
+                    size_hint_y: None
+                    height: "80dp"
+
+                TextInput:
+                    id: orientation_input
+                    hint_text: "Type your answer here"
+                    size_hint_y: None
+                    height: "50dp"
+                    on_text_validate:
+                        app.handle_orientation_submit(self.text)
+                        self.text = ""
+
+            Widget:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                PrimaryButton:
+                    text: "Submit Answer"
+                    size_hint_x: 0.6
+                    on_release:
+                        app.handle_orientation_submit(orientation_input.text)
+                        orientation_input.text = ""
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.1
+
+<OrientationScoreScreen>:
+    name: "orientationscore"
+    orientation_score: "0/5"
+
+    ScreenBackground:
+        BoxLayout:
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "20dp"
+
+            PhaseHeader:
+                text: "ORIENTATION - COMPLETE"
+
+            Widget:
+                size_hint_y: 0.1
+
+            Card:
+                MainTitle:
+                    text: "Your Score"
+
+                ScoreDisplay:
+                    text: root.orientation_score
+
+                Label:
+                    text: "Orientation questions completed"
+                    color: 0.4, 0.5, 0.55, 1
+                    size_hint_y: None
+                    height: "40dp"
+
+            Widget:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                PrimaryButton:
+                    text: "Continue to Memory Test"
+                    size_hint_x: 0.6
+                    on_release:
+                        app.root.current = "fivewordsintro"
+                        root.manager.transition.direction = "left"
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.1
+
+# ============================================================================
+# WORD MEMORIZATION (IMMEDIATE RECALL)
+# ============================================================================
+
+<FiveWordsIntroScreen>:
     name: "fivewordsintro"
 
-    FloatLayout: 
-        Label: 
-            text: "Phase 1 - Word Memorization"
-            pos_hint: {"y": 0.3}
-        Label: 
-            text: "In the following screen, 5 words will be shown on the screen for 10 seconds. At the end of the entire process, you will have a chance to enter in the words you remembered, so do your best to remember them."
-            text_size: self.width, None
-            halign: "center"
-            valign: "center"
-            height: self.texture_size[1]
-        RoundedNextButton:
-            size_hint: 0.4, 0.2
-            text: "Proceed"
+    ScreenBackground:
+        BoxLayout:
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "25dp"
 
-            # {"x", "y", "top", "bottom", "left", "right"}
-            pos_hint: {"x": 0.3, "y": 0.05}
+            PhaseHeader:
+                text: "PHASE 2 OF 7"
 
-            on_release:
-                app.root.current = "fivewords"
-                root.manager.transition.direction = "left"
-        
+            MainTitle:
+                text: "Word Memorization"
 
+            Card:
+                Label:
+                    text: "You will be shown 5 words to memorize. The words will be displayed for 10 seconds.\n\nTry to remember all 5 words. You will be asked to recall them immediately after viewing, and again at the end of the assessment.\n\nPay close attention!"
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+            Widget:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                PrimaryButton:
+                    text: "Show Words"
+                    size_hint_x: 0.6
+                    on_release:
+                        app.start_word_display_timer(10)
+                        app.root.current = "fivewords"
+                        root.manager.transition.direction = "left"
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.1
 
 <FiveWordsScreen>:
-    name: 'fivewords'
+    name: "fivewords"
+    countdown: "10"
 
-    # Creates the overall BoxLayout for the FirstScreen
-    BoxLayout:
-        padding: 50
-        spacing: 50
-        orientation: "vertical"
-
-        # Creates a BoxLayout as an element within the BoxLayout
+    ScreenBackground:
         BoxLayout:
-            size_hint: 1, .2
-            orientation: "horizontal"
-            Label:
-                text:""
-                size_hint_x: .2
-            Label:
-                text: 'Memorize these 5 words:'
-                font_size: "30dp"
-
-                # Sets Background Color
-                background_color: (1, 1, 1, 1)
-                canvas.before:
-                    Color:
-                        rgba: self.background_color
-                    Rectangle: 
-                        size: self.size
-                        pos: self.pos
-
-                # Text Properties
-                color: (0, 0, 0, 1)
-                bold: True
-                outline_color: (0,0,0)
-                outline_width: "0dp"
-            Label: 
-                text: ""
-                size_hint_x: .2
-
-        # Creates a BoxLayout as an element within the BoxLayout
-        BoxLayout:
-            size_hint: 1, 0.6
             orientation: "vertical"
-            Label:
-                id: word1
-                text: ''
-                
-            Label:
-                id: word2
-                text: ''
-                
-            Label:
-                id: word3
-                text: ''
-                
-            Label:
-                id: word4
-                text: ''
-                
-            Label:
-                id: word5
-                text: ''
-            
+            padding: "30dp"
+            spacing: "15dp"
+
+            PhaseHeader:
+                text: "MEMORIZE THESE WORDS"
+
+            TimerDisplay:
+                text: "Time: " + root.countdown + "s"
+
+            Card:
+                size_hint_y: 0.6
+
+                Label:
+                    id: word1
+                    text: ""
+                    font_size: "32dp"
+                    bold: True
+                    color: 0.17, 0.24, 0.31, 1
+                    size_hint_y: 0.2
+
+                Label:
+                    id: word2
+                    text: ""
+                    font_size: "32dp"
+                    bold: True
+                    color: 0.17, 0.24, 0.31, 1
+                    size_hint_y: 0.2
+
+                Label:
+                    id: word3
+                    text: ""
+                    font_size: "32dp"
+                    bold: True
+                    color: 0.17, 0.24, 0.31, 1
+                    size_hint_y: 0.2
+
+                Label:
+                    id: word4
+                    text: ""
+                    font_size: "32dp"
+                    bold: True
+                    color: 0.17, 0.24, 0.31, 1
+                    size_hint_y: 0.2
+
+                Label:
+                    id: word5
+                    text: ""
+                    font_size: "32dp"
+                    bold: True
+                    color: 0.17, 0.24, 0.31, 1
+                    size_hint_y: 0.2
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                SecondaryButton:
+                    text: "Done Memorizing"
+                    size_hint_x: 0.6
+                    on_release:
+                        app.cancel_word_timer()
+                        app.root.current = "immediaterecall"
+                        root.manager.transition.direction = "left"
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.05
+
+<ImmediateRecallScreen>:
+    name: "immediaterecall"
+
+    ScreenBackground:
         BoxLayout:
-            orientation: "horizontal"
-            size_hint: 1, .2
-            Label:
-                text:""
-            RoundedNextButton:
-                text: 'Next'
-                font_size: "25dp"
-                on_release: 
-                    app.root.current = 'check5words'
-                    root.manager.transition.direction = "left"
-            Label:
-                text:""
-            
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "20dp"
 
-<CheckWordsScreen>:
-    name: 'check5words'
-    
-    # Creates the GridLayout for SecondScreen
-    GridLayout:
-        rows: 4
-        padding: 50
-        spacing: 50
-        
-        Button:
-            text: "Back"
-            font_size: "20dp"
-            size_hint: .5, .2
-            on_release: 
-                app.root.current = "fivewords"
-                root.manager.transition.direction = "right"
-            background_color: (252/255,25/255,25/255,1)
-            
-        Label:
-            text: 'Enter the words you remember (either separate words by spaces, or press enter after typing each word):' # Instructions for the user
+            PhaseHeader:
+                text: "IMMEDIATE RECALL"
 
-            # The next 5 lines are for formatting the text and wrapping it
-            text_size: self.width, None  # Set text_size to match the width of the GridLayout
-            halign: 'center'  # Align horizontally to the center
-            valign: 'middle'  # Align vertically to the middle
-            size_hint_y: None  # Set size_hint_y to None so the Label will resize to fit its content
-            height: self.texture_size[1]  # Set height to match the height of the wrapped text
+            MainTitle:
+                text: "Enter the Words"
 
-            font_size: "30dp"
-            col_span: 2
-            size_hint: 2, 1
-            
-        # This is where the user will enter their words
-        TextInput:
-            id: textinput1
-            multiline: False
-            font_size: "25dp"
-            on_text: 
-                root.input1 = self.text
-            
-            # This function calculates to see if correct words are entered
-            on_text_validate:
-                app.calculatewordmemorization(root.input1.split())
-                self.text = ''
-                self.focus = True
+            Card:
+                Label:
+                    text: "Type all the words you remember, separated by spaces or commas. Press Enter or click Submit when done."
+                    size_hint_y: None
+                    height: self.texture_size[1]
 
-        
+                TextInput:
+                    id: recall_input
+                    hint_text: "Enter words here..."
+                    size_hint_y: None
+                    height: "50dp"
+                    on_text_validate:
+                        app.calculate_immediate_recall(self.text)
+                        app.finish_immediate_recall()
+                        app.root.current = "immediaterecallscore"
+
+            Widget:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                PrimaryButton:
+                    text: "Submit Words"
+                    size_hint_x: 0.6
+                    on_release:
+                        app.calculate_immediate_recall(recall_input.text)
+                        app.finish_immediate_recall()
+                        app.root.current = "immediaterecallscore"
+                        root.manager.transition.direction = "left"
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.1
+
+<ImmediateRecallScoreScreen>:
+    name: "immediaterecallscore"
+    immediate_score: "0/5"
+
+    ScreenBackground:
         BoxLayout:
-            orientation: "horizontal"
-            padding: "20dp"
-            Label:
-                text:""
-            # Button to click to check the score
-            RoundedNextButton:
-                text: "Check Score"
-                font_size: "40dp"
-                on_release: 
-                    app.root.current = "displayscore"
-                    root.manager.transition.direction = "left"
-                    app.root.get_screen('check5words').score = app.wordmemorizationscore
-            Label:
-                text:""
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "20dp"
 
-<DisplayScoreScreen>:
-    name: 'displayscore'
+            PhaseHeader:
+                text: "IMMEDIATE RECALL - COMPLETE"
 
-    BoxLayout:
-        orientation: "vertical"
-        padding: 50
-        spacing: 50
-        Label:
-            font_size: "80dp"
-            size_hint: 1, .4
-            text: "You scored..."
+            Widget:
+                size_hint_y: 0.1
 
-        Label:
-            font_size: "80dp"
-            size_hint: 1, .4
-            text: root.wordmemorizationscore    # Display the score as a fraction of the total words
+            Card:
+                MainTitle:
+                    text: "Your Score"
 
-        RoundedNextButton:
-            text: "Next"
-            size_hint: 1, .2
-            on_release:
-                app.root.current = "serial7sintro"
-                root.manager.transition.direction = "left"
+                ScoreDisplay:
+                    text: root.immediate_score
 
-<Serial7sIntroScreen>
+                Label:
+                    text: "Words recalled correctly\n(You'll be asked to recall these again later)"
+                    color: 0.4, 0.5, 0.55, 1
+                    size_hint_y: None
+                    height: "60dp"
+
+            Widget:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                PrimaryButton:
+                    text: "Continue to Serial 7s"
+                    size_hint_x: 0.6
+                    on_release:
+                        app.root.current = "serial7sintro"
+                        root.manager.transition.direction = "left"
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.1
+
+# ============================================================================
+# SERIAL 7s TEST
+# ============================================================================
+
+<Serial7sIntroScreen>:
     name: "serial7sintro"
 
-    FloatLayout:
-        padding: 50
-        spacing: 50
-        Label:
-            text: "Phase 2 - Serial 7's Test"
-            pos_hint: {"x": 0, "y": 0.2}
-        Label:
-            text: "Next, you will have to count down from 100 by 7s, entering these 5 consecutive numbers. For example, if you were counting down from 65, you would enter: 58, 51, 44, 37, and 30"
-            text_size: self.width, None
-            height: self.texture_size[1]
-            halign: "center"
-            valign: "center"
-        RoundedNextButton:
-            text: "Proceed"
-            size_hint: .7, .2
-            pos_hint: {"x": 0.15, "y": 0.1}
-            on_release: 
-                app.root.current = "serial7sscreen"
-                root.manager.transition.direction = "left"
+    ScreenBackground:
+        BoxLayout:
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "25dp"
 
-<Serial7sScreen>
+            PhaseHeader:
+                text: "PHASE 3 OF 7"
+
+            MainTitle:
+                text: "Serial 7s"
+
+            Card:
+                Label:
+                    text: "This test measures attention and calculation ability.\n\nStarting from 100, subtract 7 repeatedly. Enter the first 5 numbers in the sequence.\n\n[b]Example:[/b] Starting from 30: 23, 16, 9, 2, -5"
+                    markup: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+            Widget:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                PrimaryButton:
+                    text: "Begin"
+                    size_hint_x: 0.6
+                    on_release:
+                        app.root.current = "serial7sscreen"
+                        root.manager.transition.direction = "left"
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.1
+
+<Serial7sScreen>:
     name: "serial7sscreen"
 
-    FloatLayout:
-        padding: 50
-        spacing: 50
-        Label:
-            text: "Count down from 100 by 7s"
-            pos_hint: {"y": 0.4}
-        Label:
-            text: "Input 5 numbers"
-            pos_hint: {"y": 0.3}
-        TextInput: 
-            id: textinput2
-            size_hint: 0.9, .3
-            pos_hint: {"x": 0.05, "y": 0.4}
-            multiline: False
-            font_size: "25dp"
-            on_text: 
-                root.inputnums = self.text
-            on_text_validate:
-                app.calculateserial7s(root.inputnums.split())
-                self.text = ''
-                self.focus = True
-        RoundedNextButton:
-            size_hint: 0.5, 0.2
-            pos_hint: {"x": 0.25, "y": 0.1}
-            text: "Next"
-            on_release:
-                app.root.current = "serial7sscore"
-                root.manager.transition.direction = "left"
-                app.root.get_screen("serial7sscreen").score = app.serial7sscore
+    ScreenBackground:
+        BoxLayout:
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "20dp"
 
-<Serial7sScoreScreen>
+            PhaseHeader:
+                text: "SERIAL 7s"
+
+            MainTitle:
+                text: "Count Down from 100"
+
+            Card:
+                Label:
+                    text: "Subtract 7 from 100, then subtract 7 from that result, and continue for 5 numbers total.\n\nEnter all 5 numbers separated by spaces or commas."
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+                Label:
+                    text: "100 - 7 = ?"
+                    font_size: "28dp"
+                    bold: True
+                    color: 0.2, 0.6, 0.86, 1
+                    size_hint_y: None
+                    height: "50dp"
+
+                TextInput:
+                    id: serial7s_input
+                    hint_text: "Enter 5 numbers (e.g., 93 86 79 72 65)"
+                    size_hint_y: None
+                    height: "50dp"
+                    on_text_validate:
+                        app.calculate_serial7s(self.text)
+                        app.finish_serial7s()
+                        app.root.current = "serial7sscore"
+
+            Widget:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                PrimaryButton:
+                    text: "Submit Answers"
+                    size_hint_x: 0.6
+                    on_release:
+                        app.calculate_serial7s(serial7s_input.text)
+                        app.finish_serial7s()
+                        app.root.current = "serial7sscore"
+                        root.manager.transition.direction = "left"
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.1
+
+<Serial7sScoreScreen>:
     name: "serial7sscore"
-    
-    BoxLayout:
-        orientation: "vertical"
-        padding: 50
-        spacing: 50
-        Label:
-            font_size: "80dp"
-            size_hint: 1, .4
-            text: "You scored..."
+    serial7s_score: "0/5"
 
-        Label:
-            font_size: "80dp"
-            size_hint: 1, .4
-            text: root.serial7sscore    # Display the score as a fraction of the total numbers
+    ScreenBackground:
+        BoxLayout:
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "20dp"
 
-        RoundedNextButton:
-            text: "Next"
-            size_hint: 1, .2
-            on_release:
-                app.root.current = "strooptestintro"
-                root.manager.transition.direction = "left"
+            PhaseHeader:
+                text: "SERIAL 7s - COMPLETE"
 
+            Widget:
+                size_hint_y: 0.1
 
+            Card:
+                MainTitle:
+                    text: "Your Score"
 
-<StroopTestIntroScreen>
+                ScoreDisplay:
+                    text: root.serial7s_score
+
+                Label:
+                    text: "Correct subtractions"
+                    color: 0.4, 0.5, 0.55, 1
+                    size_hint_y: None
+                    height: "40dp"
+
+            Widget:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                PrimaryButton:
+                    text: "Continue to Digit Span"
+                    size_hint_x: 0.6
+                    on_release:
+                        app.root.current = "digitspanintro"
+                        root.manager.transition.direction = "left"
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.1
+
+# ============================================================================
+# DIGIT SPAN TEST
+# ============================================================================
+
+<DigitSpanIntroScreen>:
+    name: "digitspanintro"
+
+    ScreenBackground:
+        BoxLayout:
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "25dp"
+
+            PhaseHeader:
+                text: "PHASE 4 OF 7"
+
+            MainTitle:
+                text: "Digit Span"
+
+            Card:
+                Label:
+                    text: "This test measures working memory.\n\n[b]Part 1 - Forward:[/b] You will see a sequence of numbers. Type them back in the same order.\n\n[b]Part 2 - Backward:[/b] You will see another sequence. Type them back in reverse order."
+                    markup: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+            Widget:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                PrimaryButton:
+                    text: "Begin Forward Test"
+                    size_hint_x: 0.6
+                    on_release:
+                        screen = app.root.get_screen('digitspanforward')
+                        screen.digits_to_remember = app.get_forward_digits(3)
+                        screen.current_level = 3
+                        app.root.current = "digitspanforward"
+                        root.manager.transition.direction = "left"
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.1
+
+<DigitSpanForwardScreen>:
+    name: "digitspanforward"
+    digits_to_remember: ""
+    current_level: 3
+
+    ScreenBackground:
+        BoxLayout:
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "20dp"
+
+            PhaseHeader:
+                text: "DIGIT SPAN - FORWARD"
+
+            MainTitle:
+                text: "Repeat in Same Order"
+
+            Card:
+                Label:
+                    text: "Memorize these digits:"
+                    size_hint_y: None
+                    height: "30dp"
+
+                Label:
+                    text: root.digits_to_remember
+                    font_size: "48dp"
+                    bold: True
+                    color: 0.2, 0.6, 0.86, 1
+                    size_hint_y: None
+                    height: "80dp"
+
+                Label:
+                    text: "Enter them in the SAME order:"
+                    size_hint_y: None
+                    height: "30dp"
+
+                TextInput:
+                    id: forward_input
+                    hint_text: "Enter digits (e.g., 3 7 2)"
+                    size_hint_y: None
+                    height: "50dp"
+
+            Widget:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                PrimaryButton:
+                    text: "Submit"
+                    size_hint_x: 0.6
+                    on_release:
+                        app.handle_forward_submit(forward_input.text)
+                        forward_input.text = ""
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.1
+
+<DigitSpanBackwardScreen>:
+    name: "digitspanbackward"
+    digits_to_remember: ""
+    current_level: 2
+
+    ScreenBackground:
+        BoxLayout:
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "20dp"
+
+            PhaseHeader:
+                text: "DIGIT SPAN - BACKWARD"
+
+            MainTitle:
+                text: "Repeat in Reverse Order"
+
+            Card:
+                Label:
+                    text: "Memorize these digits:"
+                    size_hint_y: None
+                    height: "30dp"
+
+                Label:
+                    text: root.digits_to_remember
+                    font_size: "48dp"
+                    bold: True
+                    color: 0.91, 0.3, 0.24, 1
+                    size_hint_y: None
+                    height: "80dp"
+
+                Label:
+                    text: "Enter them in REVERSE order:"
+                    size_hint_y: None
+                    height: "30dp"
+
+                TextInput:
+                    id: backward_input
+                    hint_text: "Enter digits backwards (e.g., 2 7 3)"
+                    size_hint_y: None
+                    height: "50dp"
+
+            Widget:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                PrimaryButton:
+                    text: "Submit"
+                    size_hint_x: 0.6
+                    on_release:
+                        app.handle_backward_submit(backward_input.text)
+                        backward_input.text = ""
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.1
+
+<DigitSpanScoreScreen>:
+    name: "digitspanscore"
+    digit_span_score: "0/4"
+
+    ScreenBackground:
+        BoxLayout:
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "20dp"
+
+            PhaseHeader:
+                text: "DIGIT SPAN - COMPLETE"
+
+            Widget:
+                size_hint_y: 0.1
+
+            Card:
+                MainTitle:
+                    text: "Your Score"
+
+                ScoreDisplay:
+                    text: root.digit_span_score
+
+                Label:
+                    text: "Working memory score"
+                    color: 0.4, 0.5, 0.55, 1
+                    size_hint_y: None
+                    height: "40dp"
+
+            Widget:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                PrimaryButton:
+                    text: "Continue to Category Fluency"
+                    size_hint_x: 0.6
+                    on_release:
+                        app.root.current = "categoryfluencyintro"
+                        root.manager.transition.direction = "left"
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.1
+
+# ============================================================================
+# CATEGORY FLUENCY TEST
+# ============================================================================
+
+<CategoryFluencyIntroScreen>:
+    name: "categoryfluencyintro"
+
+    ScreenBackground:
+        BoxLayout:
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "25dp"
+
+            PhaseHeader:
+                text: "PHASE 5 OF 7"
+
+            MainTitle:
+                text: "Category Fluency"
+
+            Card:
+                Label:
+                    text: "This test measures verbal fluency and semantic memory.\n\nYou will have 60 seconds to name as many [b]ANIMALS[/b] as you can think of.\n\nType each animal and press Enter to add it. Try to name as many different animals as possible!"
+                    markup: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+            Widget:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                PrimaryButton:
+                    text: "Start Timer"
+                    size_hint_x: 0.6
+                    on_release:
+                        app.start_fluency_timer(60)
+                        app.root.current = "categoryfluency"
+                        root.manager.transition.direction = "left"
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.1
+
+<CategoryFluencyScreen>:
+    name: "categoryfluency"
+    timer: "60"
+
+    ScreenBackground:
+        BoxLayout:
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "15dp"
+
+            PhaseHeader:
+                text: "NAME AS MANY ANIMALS AS POSSIBLE"
+
+            TimerDisplay:
+                text: "Time: " + root.timer + "s"
+
+            Card:
+                size_hint_y: 0.5
+
+                Label:
+                    text: "Animals entered: " + app.animals_count_text
+                    font_size: "24dp"
+                    bold: True
+                    size_hint_y: None
+                    height: "40dp"
+
+                TextInput:
+                    id: animal_input
+                    hint_text: "Type an animal and press Enter"
+                    size_hint_y: None
+                    height: "50dp"
+                    on_text_validate:
+                        app.add_animal(self.text)
+                        self.text = ""
+                        self.focus = True
+
+                Label:
+                    text: "Recent: " + app.recent_animals_text
+                    color: 0.4, 0.5, 0.55, 1
+                    font_size: "14dp"
+                    size_hint_y: None
+                    height: "30dp"
+
+            Widget:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                SecondaryButton:
+                    text: "Finish Early"
+                    size_hint_x: 0.6
+                    on_release:
+                        app.cancel_fluency_timer()
+                        app.finish_fluency()
+                        app.root.current = "fluencyscore"
+                        root.manager.transition.direction = "left"
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.05
+
+<CategoryFluencyScoreScreen>:
+    name: "fluencyscore"
+    fluency_score: "0/3"
+    animals_count: "0"
+
+    ScreenBackground:
+        BoxLayout:
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "20dp"
+
+            PhaseHeader:
+                text: "CATEGORY FLUENCY - COMPLETE"
+
+            Widget:
+                size_hint_y: 0.1
+
+            Card:
+                MainTitle:
+                    text: "Your Score"
+
+                ScoreDisplay:
+                    text: root.fluency_score
+
+                Label:
+                    text: "You named " + root.animals_count + " animals"
+                    color: 0.4, 0.5, 0.55, 1
+                    size_hint_y: None
+                    height: "40dp"
+
+            Widget:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                PrimaryButton:
+                    text: "Continue to Stroop Test"
+                    size_hint_x: 0.6
+                    on_release:
+                        app.root.current = "strooptestintro"
+                        root.manager.transition.direction = "left"
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.1
+
+# ============================================================================
+# STROOP TEST
+# ============================================================================
+
+<StroopTestIntroScreen>:
     name: "strooptestintro"
-    BoxLayout:
-        orientation: 'vertical'
-        padding: 20
-        spacing: 50
 
-        Label:
-            text: "Phase 3 - Stroop Test"
-        Label:
-            text: "This test involves asking the participant to name the color of ink in which a word is written, while ignoring the actual word itself. This task can be modified by using incongruent stimuli (e.g., the word \"red\" written in blue ink) to increase the difficulty."
-            text_size: self.width, None
-            halign: "center"
-            valign: "center"
-            height: self.texture_size[1]
-        RoundedNextButton:
-            text: "Next"
-            size_hint: 0.5, 0.5
-            halign: "center"
-            on_release: 
-                app.root.current = "strooptest"
+    ScreenBackground:
+        BoxLayout:
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "25dp"
 
+            PhaseHeader:
+                text: "PHASE 6 OF 7"
 
-<StroopTestScreen>
+            MainTitle:
+                text: "Stroop Test"
+
+            Card:
+                Label:
+                    text: "This test measures executive function and cognitive flexibility.\n\nYou will see color words (like RED, BLUE) displayed in different ink colors. Your task is to identify the [b]INK COLOR[/b], not the word itself.\n\n[b]Example:[/b] If you see the word BLUE written in red ink, the correct answer is RED.\n\nYou have 30 seconds for 10 trials."
+                    markup: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+            Widget:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                PrimaryButton:
+                    text: "Begin Test"
+                    size_hint_x: 0.6
+                    on_release:
+                        trial = app.get_current_stroop_trial()
+                        screen = app.root.get_screen('strooptest')
+                        screen.word_text = trial['word']
+                        screen.word_color = trial['color_rgba']
+                        screen.trial_number = 1
+                        app.start_stroop_timer(30)
+                        app.root.current = "strooptest"
+                        root.manager.transition.direction = "left"
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.1
+
+<StroopTestScreen>:
     name: "strooptest"
+    word_text: "RED"
+    word_color: [1, 0, 0, 1]
+    trial_number: 1
+    timer: "30"
 
-    FloatLayout:
-        Label: 
-            text: "Red"
-        
+    ScreenBackground:
+        BoxLayout:
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "15dp"
 
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "40dp"
+
+                PhaseHeader:
+                    text: "TRIAL " + str(root.trial_number) + "/10"
+                    size_hint_x: 0.5
+
+                TimerDisplay:
+                    text: root.timer + "s"
+                    font_size: "24dp"
+                    halign: "right"
+                    size_hint_x: 0.5
+                    height: "40dp"
+
+            Card:
+                size_hint_y: 0.4
+
+                Label:
+                    text: "What COLOR is the ink?"
+                    font_size: "18dp"
+                    size_hint_y: None
+                    height: "30dp"
+
+                Label:
+                    text: root.word_text
+                    font_size: "72dp"
+                    bold: True
+                    color: root.word_color
+                    size_hint_y: None
+                    height: "100dp"
+
+            Label:
+                text: "Tap the color of the INK (not the word):"
+                font_size: "16dp"
+                size_hint_y: None
+                height: "30dp"
+
+            GridLayout:
+                cols: 2
+                spacing: "15dp"
+                size_hint_y: None
+                height: "130dp"
+
+                ColorButton:
+                    text: "RED"
+                    size_hint: 1, 1
+                    canvas.before:
+                        Color:
+                            rgba: 1, 0.2, 0.2, 1
+                        RoundedRectangle:
+                            size: self.size
+                            pos: self.pos
+                            radius: [10]
+                    on_release: app.handle_stroop_button("red")
+
+                ColorButton:
+                    text: "BLUE"
+                    size_hint: 1, 1
+                    canvas.before:
+                        Color:
+                            rgba: 0.2, 0.4, 1, 1
+                        RoundedRectangle:
+                            size: self.size
+                            pos: self.pos
+                            radius: [10]
+                    on_release: app.handle_stroop_button("blue")
+
+                ColorButton:
+                    text: "GREEN"
+                    size_hint: 1, 1
+                    canvas.before:
+                        Color:
+                            rgba: 0.2, 0.8, 0.2, 1
+                        RoundedRectangle:
+                            size: self.size
+                            pos: self.pos
+                            radius: [10]
+                    on_release: app.handle_stroop_button("green")
+
+                ColorButton:
+                    text: "YELLOW"
+                    size_hint: 1, 1
+                    canvas.before:
+                        Color:
+                            rgba: 0.9, 0.9, 0.2, 1
+                        RoundedRectangle:
+                            size: self.size
+                            pos: self.pos
+                            radius: [10]
+                    color: 0.3, 0.3, 0.3, 1
+                    on_release: app.handle_stroop_button("yellow")
+
+            Widget:
+
+<StroopScoreScreen>:
+    name: "stroopscore"
+    stroop_score: "0/5"
+
+    ScreenBackground:
+        BoxLayout:
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "20dp"
+
+            PhaseHeader:
+                text: "STROOP TEST - COMPLETE"
+
+            Widget:
+                size_hint_y: 0.1
+
+            Card:
+                MainTitle:
+                    text: "Your Score"
+
+                ScoreDisplay:
+                    text: root.stroop_score
+
+                Label:
+                    text: "Executive function score"
+                    color: 0.4, 0.5, 0.55, 1
+                    size_hint_y: None
+                    height: "40dp"
+
+            Widget:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                PrimaryButton:
+                    text: "Continue to Delayed Recall"
+                    size_hint_x: 0.6
+                    on_release:
+                        app.root.current = "delayedrecallintro"
+                        root.manager.transition.direction = "left"
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.1
+
+# ============================================================================
+# DELAYED RECALL TEST
+# ============================================================================
+
+<DelayedRecallIntroScreen>:
+    name: "delayedrecallintro"
+
+    ScreenBackground:
+        BoxLayout:
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "25dp"
+
+            PhaseHeader:
+                text: "PHASE 7 OF 7 - FINAL"
+
+            MainTitle:
+                text: "Delayed Recall"
+
+            Card:
+                Label:
+                    text: "Earlier in this assessment, you were shown 5 words to memorize.\n\nNow, please try to recall those same 5 words. This tests your ability to retain information over time.\n\nTake your time and try to remember as many as you can."
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+            Widget:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                PrimaryButton:
+                    text: "Enter Words"
+                    size_hint_x: 0.6
+                    on_release:
+                        app.root.current = "delayedrecall"
+                        root.manager.transition.direction = "left"
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.1
+
+<DelayedRecallScreen>:
+    name: "delayedrecall"
+
+    ScreenBackground:
+        BoxLayout:
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "20dp"
+
+            PhaseHeader:
+                text: "DELAYED RECALL"
+
+            MainTitle:
+                text: "Recall the 5 Words"
+
+            Card:
+                Label:
+                    text: "Enter all the words you remember from the beginning of the test. Separate words with spaces or commas."
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+                TextInput:
+                    id: delayed_input
+                    hint_text: "Enter the words you remember..."
+                    size_hint_y: None
+                    height: "50dp"
+                    on_text_validate:
+                        app.calculate_delayed_recall(self.text)
+                        app.finish_delayed_recall()
+                        app.root.current = "delayedrecallscore"
+
+            Widget:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                PrimaryButton:
+                    text: "Submit Words"
+                    size_hint_x: 0.6
+                    on_release:
+                        app.calculate_delayed_recall(delayed_input.text)
+                        app.finish_delayed_recall()
+                        app.root.current = "delayedrecallscore"
+                        root.manager.transition.direction = "left"
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.1
+
+<DelayedRecallScoreScreen>:
+    name: "delayedrecallscore"
+    delayed_score: "0/5"
+
+    ScreenBackground:
+        BoxLayout:
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "20dp"
+
+            PhaseHeader:
+                text: "DELAYED RECALL - COMPLETE"
+
+            Widget:
+                size_hint_y: 0.1
+
+            Card:
+                MainTitle:
+                    text: "Your Score"
+
+                ScoreDisplay:
+                    text: root.delayed_score
+
+                Label:
+                    text: "Words recalled after delay"
+                    color: 0.4, 0.5, 0.55, 1
+                    size_hint_y: None
+                    height: "40dp"
+
+            Widget:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "55dp"
+                spacing: "15dp"
+
+                Widget:
+                    size_hint_x: 0.2
+
+                PrimaryButton:
+                    text: "View Final Results"
+                    size_hint_x: 0.6
+                    on_release:
+                        app.calculate_final_results()
+                        app.root.current = "results"
+                        root.manager.transition.direction = "left"
+
+                Widget:
+                    size_hint_x: 0.2
+
+            Widget:
+                size_hint_y: 0.1
+
+# ============================================================================
+# FINAL RESULTS SCREEN
+# ============================================================================
+
+<ResultsScreen>:
+    name: "results"
+    total_score: "0/30"
+    score_category: ""
+    interpretation: ""
+
+    ScreenBackground:
+        ScrollView:
+            do_scroll_x: False
+            bar_width: "8dp"
+
+            BoxLayout:
+                orientation: "vertical"
+                padding: "30dp"
+                spacing: "20dp"
+                size_hint_y: None
+                height: self.minimum_height
+
+                MainTitle:
+                    text: "Assessment Complete"
+
+                Card:
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                    Label:
+                        text: "Overall Cognitive Score"
+                        font_size: "16dp"
+                        color: 0.4, 0.5, 0.55, 1
+                        size_hint_y: None
+                        height: "25dp"
+
+                    ScoreDisplay:
+                        text: root.total_score
+
+                    Label:
+                        text: root.score_category
+                        font_size: "24dp"
+                        bold: True
+                        color: 0.2, 0.6, 0.86, 1
+                        size_hint_y: None
+                        height: "40dp"
+
+                Card:
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                    Label:
+                        text: "[b]Score Breakdown[/b]"
+                        markup: True
+                        size_hint_y: None
+                        height: "30dp"
+
+                    Label:
+                        text: app.get_score_breakdown()
+                        halign: "left"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+
+                Card:
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                    Label:
+                        text: "[b]Interpretation[/b]"
+                        markup: True
+                        size_hint_y: None
+                        height: "30dp"
+
+                    Label:
+                        text: root.interpretation
+                        size_hint_y: None
+                        height: self.texture_size[1]
+
+                Card:
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                    Label:
+                        text: "[b]IMPORTANT REMINDER[/b]"
+                        markup: True
+                        color: 0.91, 0.3, 0.24, 1
+                        size_hint_y: None
+                        height: "30dp"
+
+                    Label:
+                        text: "This screening tool is for educational purposes only and is NOT a medical diagnosis. Results should be discussed with a qualified healthcare professional. Many factors can affect test performance, including fatigue, stress, medications, and environmental distractions.\n\nIf you have concerns about cognitive function, please consult a physician or neurologist."
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        color: 0.3, 0.35, 0.4, 1
+
+                Card:
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                    Label:
+                        text: "[b]Score Ranges[/b]"
+                        markup: True
+                        size_hint_y: None
+                        height: "30dp"
+
+                    Label:
+                        text: "26-30: Normal Cognition\n18-25: Mild Cognitive Impairment\n10-17: Moderate Cognitive Impairment\n0-9: Severe Cognitive Impairment"
+                        halign: "left"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        color: 0.4, 0.5, 0.55, 1
+
+                BoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: "55dp"
+                    spacing: "15dp"
+
+                    Widget:
+                        size_hint_x: 0.1
+
+                    SecondaryButton:
+                        text: "Take Again"
+                        size_hint_x: 0.4
+                        on_release:
+                            app.restart_assessment()
+
+                    DangerButton:
+                        text: "Exit"
+                        size_hint_x: 0.4
+                        on_release:
+                            app.stop()
+
+                    Widget:
+                        size_hint_x: 0.1
+
+                Widget:
+                    size_hint_y: None
+                    height: "30dp"
